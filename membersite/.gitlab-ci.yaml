@@ -14,8 +14,6 @@ include:
 
 stages:
   - build
-  - deploy-12bet-uat
-  - deploy-ailab-uat
-  - deploy-12bet-prod
-  - deploy-ailab-prod
+  - deploy-uat
+  - deploy-prod
 
