@@ -1,0 +1,21 @@
+variables:
+  REPO: membersite/membersite
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/membersite/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/membersite/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-12bet-uat
+  - deploy-ailab-uat
+  - deploy-12bet-prod
+  - deploy-ailab-prod
+

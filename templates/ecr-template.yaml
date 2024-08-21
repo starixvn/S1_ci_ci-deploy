@@ -1,0 +1,28 @@
+variables:
+  REGION: ap-southeast-1
+  ACCOUNT: 761771912479
+  REGISTRY_URL: $ACCOUNT.dkr.ecr.$REGION.amazonaws.com
+  IMAGE_NAME: $REGISTRY_URL/$REPO
+  # REGISTRY_PROXY_CACHE: ""
+
+.build_to_ecr: &build_to_ecr
+  - echo "Build job is working on '$NODE_NAME'"
+  - TAG=dev-$(tmp=${CI_PIPELINE_CREATED_AT//-/};echo ${tmp:0:8})-$CI_PIPELINE_ID-$CI_COMMIT_REF_SLUG
+  - echo "REPO is $REPO, TAG is $TAG"
+  - aws ecr create-repository --repository-name $REPO --region $REGION 2>/dev/null || true
+  - aws ecr put-lifecycle-policy --repository-name $REPO --lifecycle-policy-text file:///image-lifecycle-policy.json --region $REGION
+  - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $REGISTRY_URL
+
+.common_variables: &common_variables
+  - TAG=dev-$(tmp=${CI_PIPELINE_CREATED_AT//-/};echo ${tmp:0:8})-$CI_PIPELINE_ID-$CI_COMMIT_REF_SLUG
+
+.tag_prod_image: &tag_prod_image
+  - TAG=dev-$(tmp=${CI_PIPELINE_CREATED_AT//-/};echo ${tmp:0:8})-$CI_PIPELINE_ID-$CI_COMMIT_REF_SLUG
+  - PROD_TAG=prod-$(tmp=${CI_PIPELINE_CREATED_AT//-/};echo ${tmp:0:8})-$CI_PIPELINE_ID-$CI_COMMIT_REF_SLUG
+  - MANIFEST=$(aws ecr batch-get-image --region $REGION --repository-name $REPO --image-ids imageTag=$TAG --output text --query 'images[].imageManifest')
+  - aws ecr put-image --region $REGION --repository-name $REPO --image-tag $PROD_TAG --image-manifest "$MANIFEST" 2>/dev/null || true
+  - echo "set image to - $IMAGE_NAME:$PROD_TAG"
+
+.tag_latest_image: &tag_latest_image
+  - aws ecr put-image --region $REGION --repository-name $REPO --image-tag $LATEST_TAG --image-manifest "$MANIFEST" 2>/dev/null || true
+
