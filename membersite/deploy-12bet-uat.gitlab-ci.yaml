@@ -13,7 +13,7 @@ eks-12bet-uat:
   tags:
     - eks-12bet-uat
   only:
-    - /^feature/.*$/
+    - /^release.*$/
   script:
     - DEPLOY_NAME=membersite
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
