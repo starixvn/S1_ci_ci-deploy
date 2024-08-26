@@ -4,7 +4,7 @@
   when: manual
   before_script:
     - !reference [.common_variables]
-    - NAMESPACE=membersite-service
+    - NAMESPACE=api
     - CONTAINER_NAME=configservice
     - echo "set image to - $IMAGE_NAME:$TAG"
 
