@@ -1,0 +1,19 @@
+variables:
+  REPO: desktop/next-nova88-reward
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/reward/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/reward/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-uat
+  - deploy-prod
+
