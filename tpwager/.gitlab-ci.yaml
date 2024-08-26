@@ -1,0 +1,19 @@
+variables:
+  REPO: integratedservice/thirdpartywager
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/tpwager/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/tpwager/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-uat
+  - deploy-prod
+
