@@ -1,0 +1,19 @@
+variables:
+  REPO: paymentservice/paymentservice
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/paymentworker/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/paymentworker/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-uat
+  - deploy-prod
+

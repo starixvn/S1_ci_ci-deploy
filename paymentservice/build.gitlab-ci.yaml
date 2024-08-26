@@ -1,0 +1,15 @@
+.build_template: &build_template
+  stage: build
+
+build:
+  <<: *build_template
+  tags:
+    - ec2-12bet
+  only:
+    - /^release.*$/
+  script:
+    - !reference [.build_to_ecr]
+    - docker build -f PaymentService/PaymentService/Dockerfile -t $IMAGE_NAME:$TAG .
+    - docker push $IMAGE_NAME:$TAG
+    - docker rmi $IMAGE_NAME:$TAG
+
