@@ -1,0 +1,19 @@
+variables:
+  REPO: bonusservice/bonusservice
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/bonusworker/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/bonusworker/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-uat
+  - deploy-prod
+

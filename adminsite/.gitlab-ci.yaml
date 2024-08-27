@@ -1,0 +1,19 @@
+variables:
+  REPO: adminsite/backendsite
+
+include:
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/adminsite/build.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/adminsite/deploy-12bet-uat.gitlab-ci.yaml"
+  - project: "sre/gitlab-ci-configs"
+    ref: "main"
+    file: "/templates/ecr-template.yaml"
+
+stages:
+  - build
+  - deploy-uat
+  - deploy-prod
+

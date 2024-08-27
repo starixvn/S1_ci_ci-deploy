@@ -1,0 +1,21 @@
+.deploy_12bet_uat_template: &deploy_12bet_uat_template
+  stage: deploy-uat
+  image: $REGISTRY_URL/sre/kubectl:latest
+  when: manual
+  before_script:
+    - !reference [.common_variables]
+    - NAMESPACE=worker
+    - CONTAINER_NAME=thirdpartybethistory
+    - echo "set image to - $IMAGE_NAME:$TAG"
+
+eks-12bet-uat:
+  <<: *deploy_12bet_uat_template
+  tags:
+    - eks-12bet-uat
+  only:
+    - /^release.*$/
+  script:
+    - DEPLOY_NAME=thirdpartybethistory
+    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
+    - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
+
