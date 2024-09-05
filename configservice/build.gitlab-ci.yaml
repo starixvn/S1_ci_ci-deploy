@@ -1,5 +1,4 @@
 .build_template: &build_template
-  <<: *build_to_ecr
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
 
