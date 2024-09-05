@@ -4,7 +4,7 @@
   when: manual
   before_script:
     - !reference [.common_variables]
-    - NAMESPACE=api
+    - NAMESPACE=membersite-service
     - CONTAINER_NAME=configservice
     - echo "set image to - $IMAGE_NAME:$TAG"
 
@@ -14,6 +14,7 @@ eks-12bet-uat:
     - eks-12bet-uat
   only:
     - /^release.*$/
+    - /^feature/.*$/
   script:
     - DEPLOY_NAME=configservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG

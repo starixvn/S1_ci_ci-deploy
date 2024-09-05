@@ -1,6 +1,6 @@
 variables:
-  REGION: ap-southeast-1
-  ACCOUNT: 761771912479
+  REGION: ap-northeast-1
+  ACCOUNT: 484907507662
   REGISTRY_URL: $ACCOUNT.dkr.ecr.$REGION.amazonaws.com
   IMAGE_NAME: $REGISTRY_URL/$REPO
   # REGISTRY_PROXY_CACHE: ""
