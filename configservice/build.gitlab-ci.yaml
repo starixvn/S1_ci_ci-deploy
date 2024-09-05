@@ -4,6 +4,7 @@
 
 build:
   <<: *build_template
+  <<: *build_to_ecr
   tags:
     - ec2-gitlab-runner
   only:
