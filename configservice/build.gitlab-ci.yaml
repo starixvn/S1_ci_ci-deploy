@@ -10,8 +10,6 @@ build:
     - /^release.*$/
     - /^feature/.*$/
   script:
-    - echo "--------------------------------------------"
-    - echo $ACCOUNT
     - !reference [.build_to_ecr]
     - docker build -f ConfigService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
