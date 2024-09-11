@@ -1,5 +1,5 @@
 variables:
-  REPO: adminsite/backendsite
+  REPO: backend/adminsite
 
 include:
   - project: "sre/gitlab-ci-configs"
