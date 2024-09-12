@@ -1,6 +1,7 @@
-.deploy_12bet_uat_template: &deploy_12bet_uat_template
+.deploy_12bet_uat_storehangfireservice_template: &deploy_12bet_uat_storehangfireservice_template
   stage: deploy-uat
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
+  REPO: backend/storehangfireservice
   when: manual
   before_script:
     - !reference [.common_variables]
@@ -8,8 +9,8 @@
     - CONTAINER_NAME=storehangfireservice
     - echo "set image to - $IMAGE_NAME:$TAG"
 
-eks-12bet-uat:
-  <<: *deploy_12bet_uat_template
+eks-12bet-uat-storehangfireservice:
+  <<: *deploy_12bet_uat_storehangfireservice_template
   tags:
     - eks-12bet-uat
   only:

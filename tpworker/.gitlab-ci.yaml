@@ -1,6 +1,3 @@
-variables:
-  REPO: backend/tpworker
-
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"

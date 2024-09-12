@@ -1,9 +1,10 @@
-.build_template: &build_template
+.build_template_storehangfireservice: &build_template_storehangfireservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
+  REPO: backend/storehangfireservice
 
-build:
-  <<: *build_template
+build-storehangfireservice:
+  <<: *build_template_storehangfireservice
   tags:
     - ec2-gitlab-runner
   only:

@@ -1,6 +1,3 @@
-variables:
-  REPO: backend/commonservice
-
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"

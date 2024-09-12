@@ -1,9 +1,10 @@
-.build_template: &build_template
+.build_template_bonusservice: &build_template_bonusservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
+  REPO: backend/bonusservice
 
-build:
-  <<: *build_template
+build-bonusservice:
+  <<: *build_template_bonusservice
   tags:
     - ec2-gitlab-runner
   only:
