@@ -1,5 +1,5 @@
 variables:
-  REPO: storeservice/storeservice
+  REPO: backend/storeservice
 
 include:
   - project: "sre/gitlab-ci-configs"

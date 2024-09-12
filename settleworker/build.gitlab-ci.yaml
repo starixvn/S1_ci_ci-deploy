@@ -1,12 +1,14 @@
 .build_template: &build_template
   stage: build
+  image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
 
 build:
   <<: *build_template
   tags:
-    - ec2-12bet
+    - ec2-gitlab-runner
   only:
     - /^release.*$/
+    - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
     - docker build -f ThirdPartySeamlessWallet/ThirdPartySettleWorker/Dockerfile -t $IMAGE_NAME:$TAG .
