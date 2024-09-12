@@ -1,12 +1,15 @@
-.build_template: &build_template
+.build_template_bonusworker: &build_template_bonusworker
   stage: build
+  image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
+  REPO: backend/bonusworker
 
-build:
-  <<: *build_template
+build-bonusworker:
+  <<: *build_template_bonusworker
   tags:
-    - ec2-12bet
+    - ec2-gitlab-runner
   only:
     - /^release.*$/
+    - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
     - docker build -f BonusService/Dockerfile -t $IMAGE_NAME:$TAG .

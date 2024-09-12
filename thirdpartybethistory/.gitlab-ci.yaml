@@ -1,6 +1,3 @@
-variables:
-  REPO: integratedservice/thirdpartybethistory
-
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"

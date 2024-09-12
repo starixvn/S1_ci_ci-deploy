@@ -1,6 +1,7 @@
-.deploy_12bet_uat_template: &deploy_12bet_uat_template
+.deploy_12bet_uat_paymentservice_template: &deploy_12bet_uat_paymentservice_template
   stage: deploy-uat
-  image: $REGISTRY_URL/sre/kubectl:latest
+  image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
+  REPO: backend/paymentservice
   when: manual
   before_script:
     - !reference [.common_variables]
@@ -8,12 +9,13 @@
     - CONTAINER_NAME=paymentservice
     - echo "set image to - $IMAGE_NAME:$TAG"
 
-eks-12bet-uat:
-  <<: *deploy_12bet_uat_template
+eks-12bet-uat-paymentservice:
+  <<: *deploy_12bet_uat_paymentservice_template
   tags:
     - eks-12bet-uat
   only:
     - /^release.*$/
+    - /^feature/.*$/
   script:
     - DEPLOY_NAME=paymentservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG

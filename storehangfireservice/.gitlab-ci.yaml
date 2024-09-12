@@ -1,6 +1,3 @@
-variables:
-  REPO: storeservice/storehangfireservice
-
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"
