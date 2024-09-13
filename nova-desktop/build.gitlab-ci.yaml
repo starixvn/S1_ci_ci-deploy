@@ -13,7 +13,7 @@ build-nova-desktop:
     - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
-    -	docker build -f dockerfile --build-arg project_name=nova-desktop --build-arg port=5073 --build-arg env=dev -t $Img .
+    -	docker build -f /dockerfile --build-arg project_name=nova-desktop --build-arg port=5073 --build-arg env=dev -t $Img .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 
