@@ -13,7 +13,7 @@ build-nova-mobile:
     - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
-    - docker build -f dockerfile -t $IMAGE_NAME:$TAG .
+    - docker build -f dockerfile --build-arg project_name=nova-h5 --build-arg port=5074 --build-arg env=dev -t $Img .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 
