@@ -1,7 +1,8 @@
 .build_adminsite_template: &build_adminsite_template
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/adminsite
+  variables:
+    REPO: backend/adminsite
 
 build-adminsite:
   <<: *build_adminsite_template

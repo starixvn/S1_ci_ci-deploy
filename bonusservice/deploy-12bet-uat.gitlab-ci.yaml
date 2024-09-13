@@ -1,7 +1,8 @@
 .deploy_12bet_uat_bonusservice_template: &deploy_12bet_uat_bonusservice_template
   stage: deploy-uat
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
-  REPO: backend/bonusservice
+  variables:
+    REPO: backend/bonusservice
   when: manual
   before_script:
     - !reference [.common_variables]

@@ -1,7 +1,8 @@
 .build_template_commonservice: &build_template_commonservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/commonservice
+  variables:
+    REPO: backend/commonservice
 
 build-commonservice:
   <<: *build_template_commonservice

@@ -1,7 +1,8 @@
 .build_template_paymentservice: &build_template_paymentservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/paymentservice
+  variables:
+    REPO: backend/paymentservice
 
 build-paymentservice:
   <<: *build_template_paymentservice
