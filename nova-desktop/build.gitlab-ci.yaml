@@ -3,6 +3,9 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   variables:
     REPO: frontend/nova-desktop
+    PROJECT: nova88-desktop
+    PROJECTPORT: 5073
+    ENV: dev
 
 build-nova-desktop:
   <<: *build_nova_desktop_template
@@ -13,7 +16,7 @@ build-nova-desktop:
     - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
-    -	docker build -f /dockerfile --build-arg project_name=nova-desktop --build-arg port=5073 --build-arg env=dev -t $Img .
+    - docker build -f dockerfile --build-arg project_name=$PROJECT --build-arg port=$PROJECTPORT --build-arg env=$ENV -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 

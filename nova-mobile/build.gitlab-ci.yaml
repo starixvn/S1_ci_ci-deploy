@@ -3,7 +3,10 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   variables:
     REPO: frontend/nova-mobile
-  
+    PROJECT: nova88-h5
+    PROJECTPORT: 5074
+    ENV: dev
+
 build-nova-mobile:
   <<: *build_nova_mobile_template
   tags:
@@ -13,7 +16,7 @@ build-nova-mobile:
     - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
-    - docker build -f /dockerfile --build-arg project_name=nova-h5 --build-arg port=5074 --build-arg env=dev -t $Img .
+    - docker build -f dockerfile --build-arg project_name=$PROJECT --build-arg port=$PROJECTPORT --build-arg env=$ENV -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 
