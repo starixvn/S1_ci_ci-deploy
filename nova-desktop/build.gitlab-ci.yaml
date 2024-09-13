@@ -1,4 +1,4 @@
-.build_nova_desktop_template: &build_nova_desktoptemplate
+.build_nova_desktop_template: &build_nova_desktop_template
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   REPO: frontend/nova-desktop
