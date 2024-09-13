@@ -1,7 +1,8 @@
 .build_template_configservice: &build_template_configservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/configservice
+  variables:
+    REPO: backend/configservice
 
 build-configservice:
   <<: *build_template_configservice

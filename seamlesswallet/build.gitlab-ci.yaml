@@ -1,7 +1,8 @@
 .build_template_seamlesswallet: &build_template_seamlesswallet
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/seamlesswallet
+  variables:
+    REPO: backend/seamlesswallet
 
 build-seamlesswallet:
   <<: *build_template_seamlesswallet

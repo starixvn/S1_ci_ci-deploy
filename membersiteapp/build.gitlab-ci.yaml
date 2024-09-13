@@ -1,7 +1,8 @@
 .build_membersiteapp_template: &build_membersiteapp_template
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  REPO: backend/membersiteapp
+  variables:
+    REPO: backend/membersiteapp
 
 build-membersiteapp:
   <<: *build_membersiteapp_template
