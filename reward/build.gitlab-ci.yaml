@@ -3,6 +3,9 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   variables:
     REPO: frontend/reward
+    PROJECT: nova88
+    PROJECTPORT: 5073
+    ENV: dev
 
 build-reward:
   <<: *build_template_reward
@@ -13,7 +16,7 @@ build-reward:
     - /^feature/.*$/
   script:
     - !reference [.build_to_ecr]
-    - docker build -f dockerfile -t $IMAGE_NAME:$TAG .
+    - docker build -f dockerfile --build-arg project_name=$PROJECT --build-arg port=$PROJECTPORT --build-arg env=$ENV -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 
