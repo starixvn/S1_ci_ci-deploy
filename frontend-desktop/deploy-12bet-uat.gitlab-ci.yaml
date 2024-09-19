@@ -10,7 +10,7 @@
     - CONTAINER_NAME=nova-desktop
     - echo "set image to - $IMAGE_NAME:$TAG"
 
-eks-12bet-uat-nova-desktop:
+eks-12bet-uat-desktop:
   <<: *deploy_12bet_uat_nova_desktop_template
   tags:
     - eks-12bet-uat

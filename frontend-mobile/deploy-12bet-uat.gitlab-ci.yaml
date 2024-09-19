@@ -10,7 +10,7 @@
     - CONTAINER_NAME=nova-mobile
     - echo "set image to - $IMAGE_NAME:$TAG"
 
-eks-12bet-uat-nova-mobile:
+eks-12bet-uat-mobile:
   <<: *deploy_12bet_uat_nova_mobile_template
   tags:
     - eks-12bet-uat
