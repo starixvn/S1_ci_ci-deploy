@@ -9,8 +9,7 @@ build-adminsite:
   tags:
     - ec2-gitlab-runner
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - DEV
   script:
     - !reference [.build_to_ecr]
     - docker build -f BackendSite/BackendSite/Dockerfile -t $IMAGE_NAME:$TAG .
