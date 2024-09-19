@@ -1,10 +1,10 @@
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"
-    file: "/reward/build.gitlab-ci.yaml"
+    file: "/frontend-reward/build.gitlab-ci.yaml"
   - project: "sre/gitlab-ci-configs"
     ref: "main"
-    file: "/reward/deploy-12bet-uat.gitlab-ci.yaml"
+    file: "/frontend-reward/deploy-12bet-uat.gitlab-ci.yaml"
   - project: "sre/gitlab-ci-configs"
     ref: "main"
     file: "/templates/ecr-template.yaml"

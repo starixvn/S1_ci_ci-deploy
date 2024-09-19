@@ -1,10 +1,10 @@
 include:
   - project: "sre/gitlab-ci-configs"
     ref: "main"
-    file: "/nova-mobile/build.gitlab-ci.yaml"
+    file: "/frontend-mobile/build.gitlab-ci.yaml"
   - project: "sre/gitlab-ci-configs"
     ref: "main"
-    file: "/nova-mobile/deploy-12bet-uat.gitlab-ci.yaml"
+    file: "/frontend-mobile/deploy-12bet-uat.gitlab-ci.yaml"
   - project: "sre/gitlab-ci-configs"
     ref: "main"
     file: "/templates/ecr-template.yaml"
