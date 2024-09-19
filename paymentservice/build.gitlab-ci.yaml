@@ -9,8 +9,7 @@ build-paymentservice:
   tags:
     - ec2-gitlab-runner
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - DEV
   script:
     - !reference [.build_to_ecr]
     - docker build -f PaymentService/PaymentService/Dockerfile -t $IMAGE_NAME:$TAG .

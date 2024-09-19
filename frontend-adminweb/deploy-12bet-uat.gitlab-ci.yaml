@@ -15,8 +15,7 @@ eks-12bet-uat-adminweb:
   tags:
     - eks-12bet-uat
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - stage
   script:
     - DEPLOY_NAME=adminweb
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
