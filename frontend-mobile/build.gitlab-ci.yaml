@@ -12,8 +12,7 @@ build-nova-mobile:
   tags:
     - ec2-gitlab-runner
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - stage
   script:
     - !reference [.build_to_ecr]
     - docker build -f dockerfile --build-arg project_name=$PROJECT --build-arg port=$PROJECTPORT --build-arg env=$ENV -t $IMAGE_NAME:$TAG .

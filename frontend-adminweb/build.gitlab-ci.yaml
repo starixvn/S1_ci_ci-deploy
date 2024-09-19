@@ -9,8 +9,7 @@ build-adminweb:
   tags:
     - ec2-gitlab-runner
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - stage
   script:
     - !reference [.build_to_ecr]
     - docker build -f dockerfile -t $IMAGE_NAME:$TAG .
