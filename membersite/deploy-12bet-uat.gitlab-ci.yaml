@@ -3,7 +3,6 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
   variables:
     REPO: backend/membersite
-  when: manual
   before_script:
     - !reference [.common_variables]
     - NAMESPACE=api
@@ -15,10 +14,13 @@ eks-12bet-uat-membersite:
   tags:
     - eks-12bet-uat
   only:
-    - /^release.*$/
-    - /^feature/.*$/
+    - DEV
   script:
     - DEPLOY_NAME=membersite
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
+    
+    - DEPLOY_APP_NAME=membersite-app
+    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_APP_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
+    - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_APP_NAME --timeout 600s
 
