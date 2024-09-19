@@ -19,8 +19,4 @@ eks-12bet-uat-membersite:
     - DEPLOY_NAME=membersite
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
-    
-    - DEPLOY_APP_NAME=membersite-app
-    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_APP_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
-    - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_APP_NAME --timeout 600s
 
