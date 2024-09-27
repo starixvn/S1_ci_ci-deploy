@@ -12,8 +12,14 @@ build-storeservice:
     - DEV
   script:
     - !reference [.build_to_ecr]
+    - echo "branch = $CI_COMMIT_BRANCH"
     - echo "variables PROJECT=${PROJECT}"
     - echo "variables PROJECTPORT=${PROJECTPORT}"
+    - echo "variables ENV=${ENV}"
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV"'
+      variables:
+        ENV: "dev"
     - echo "variables ENV=${ENV}"
 
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
