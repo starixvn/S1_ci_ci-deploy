@@ -3,6 +3,9 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   variables:
     REPO: backend/storeservice
+    PROJECT: nova88
+    PROJECTPORT: 5073
+    ENV: dev
 
 build-storeservice:
   <<: *build_template_storeservice
@@ -12,6 +15,10 @@ build-storeservice:
     - DEV
   script:
     - !reference [.build_to_ecr]
+    - echo "variables PROJECT=${PROJECT}"
+    - echo "variables PROJECTPORT=${PROJECTPORT}"
+    - echo "variables ENV=${ENV}"
+    
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
