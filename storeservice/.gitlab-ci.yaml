@@ -14,3 +14,11 @@ stages:
   - deploy-uat
   - deploy-prod
 
+variables:
+  PROJECT:
+    value: "nova" # default value of the dropdown list
+    options: # options in the dropdown list
+      - "nova"
+      - "12bet"
+      - "yashbet"
+    description: "etta test."
