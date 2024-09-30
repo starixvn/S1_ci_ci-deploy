@@ -12,9 +12,12 @@ build-storeservice:
     - if: '$CI_COMMIT_BRANCH == "DEV"'
       variables:
         ENV: "dev"
+      when: always 
     - if: '$CI_COMMIT_BRANCH == "PRD"'
       variables:
         ENV: "prd"
+      when: always 
+   
   script:
     - !reference [.build_to_ecr]
     - echo "branch = $CI_COMMIT_BRANCH"
