@@ -13,8 +13,16 @@ eks-12bet-uat-storehangfireservice:
   <<: *deploy_12bet_uat_storehangfireservice_template
   tags:
     - eks-12bet-uat
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+      variables:
+        ENV: "dev"
+      when: always 
+    - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+      variables:
+        ENV: "prd"
+      when: always
+    - when: never
   script:
     - DEPLOY_NAME=storehangfireservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
