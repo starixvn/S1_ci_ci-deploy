@@ -17,8 +17,8 @@ build-storeservice:
       variables:
         ENV: "prd"
       when: always
-    - if: '$PROJECT != "storeservice" && $PROJECT != "all"'
-      when: never
+    - if: '$PROJECT == "storeservice" || $PROJECT == "all"'
+      when: always
     when: never
 
   script:

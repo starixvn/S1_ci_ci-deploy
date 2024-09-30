@@ -19,9 +19,10 @@ build-storehangfireservice:
       variables:
         ENV: "prd"
       when: always
-    - if: '$PROJECT != "storehangfireservice" && $PROJECT != "all"'
-      when: never
+    - if: '$PROJECT == "storehangfireservice" && $PROJECT == "all"'
+      when: always
     when: never
+    
   script:
     - !reference [.build_to_ecr]
     - docker build -f StoreService/StoreHangfireService/Dockerfile -t $IMAGE_NAME:$TAG .
