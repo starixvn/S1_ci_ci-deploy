@@ -14,11 +14,11 @@ eks-12bet-uat-storehangfireservice:
   tags:
     - eks-12bet-uat
   rules:
-    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storehangfireservice" || $PROJECT == "all")'
       variables:
         ENV: "dev"
       when: always 
-    - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+    - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storehangfireservice" || $PROJECT == "all")'
       variables:
         ENV: "prd"
       when: always
