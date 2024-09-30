@@ -19,7 +19,7 @@ build-storeservice:
       when: always
     - if: '$PROJECT == "storeservice" || $PROJECT == "all"'
       when: always
-     - when: never
+    - when: never
 
   script:
     - !reference [.build_to_ecr]

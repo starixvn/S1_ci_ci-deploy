@@ -14,3 +14,12 @@ stages:
   - deploy-uat
   - deploy-prod
 
+variables:
+  PROJECT:
+    value: "storeservice"
+    options:
+      - "storeservice"
+      - "hangfirestoreservice"
+      - "all"
+    description: "please select one brand to build & deploy."
+
