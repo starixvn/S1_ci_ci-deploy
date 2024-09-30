@@ -1,33 +1,33 @@
 .build_template_storeservice: &build_template_storeservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  #variables:
-  #  REPO: backend/storeservice
+  variables:
+    REPO: backend/storeservice
 
-  before_script:
-    - echo "Setting REPO and IMAGE_PREFIX based on the branch..."
-    # 判斷 PROJECT 並動態設置 REPO 和 IMAGE_PREFIX
-    - |
-      if [[ $PROJECT == "nova" ]]; then
-        export REPO="backend/nova-storeservice"
-        export IMAGE_PREFIX=11111111111
-      elif [[ $PROJECT == "12bet" ]]; then
-        export REPO="backend/onetwobet-storeservice"
-        export IMAGE_PREFIX=484907507662
-      elif [[ $PROJECT == "yashbet"  ]]; then
-        export REPO="backend/yashbet-storeservice"
-        export IMAGE_PREFIX=22222222222
-      fi
-    - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-    - echo "REPO is set to ${REPO}"
-    - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
-    - echo "image is set to ${image}"
-    - REPO="backend/storeservice"
-    - IMAGE_PREFIX=484907507662
-    - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-    - echo "REPO is set to ${REPO}"
-    - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
-    - echo "image is set to ${image}"
+  # before_script:
+  #   - echo "Setting REPO and IMAGE_PREFIX based on the branch..."
+  #   # 判斷 PROJECT 並動態設置 REPO 和 IMAGE_PREFIX
+  #   - |
+  #     if [[ $PROJECT == "nova" ]]; then
+  #       export REPO="backend/nova-storeservice"
+  #       export IMAGE_PREFIX=11111111111
+  #     elif [[ $PROJECT == "12bet" ]]; then
+  #       export REPO="backend/onetwobet-storeservice"
+  #       export IMAGE_PREFIX=484907507662
+  #     elif [[ $PROJECT == "yashbet"  ]]; then
+  #       export REPO="backend/yashbet-storeservice"
+  #       export IMAGE_PREFIX=22222222222
+  #     fi
+  #   - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
+  #   - echo "REPO is set to ${REPO}"
+  #   - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
+  #   - echo "image is set to ${image}"
+  #   - REPO="backend/storeservice"
+  #   - IMAGE_PREFIX=484907507662
+  #   - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
+  #   - echo "REPO is set to ${REPO}"
+  #   - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
+  #   - echo "image is set to ${image}"
 
 build-storeservice:
   <<: *build_template_storeservice
