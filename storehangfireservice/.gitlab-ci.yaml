@@ -19,7 +19,7 @@ variables:
     value: "storeservice"
     options:
       - "storeservice"
-      - "hangfirestoreservice"
+      - "storehangfireservice"
       - "all"
     description: "please select one brand to build & deploy."
 

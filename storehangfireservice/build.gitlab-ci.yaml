@@ -11,15 +11,13 @@ build-storehangfireservice:
   #only:
   #  - DEV
   rules:
-    - if: '$CI_COMMIT_BRANCH == "DEV"'
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storehangfireservice" || $PROJECT == "all")'
       variables:
         ENV: "dev"
       when: always 
-    - if: '$CI_COMMIT_BRANCH == "PRD"'
+    - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storehangfireservice" || $PROJECT == "all")'
       variables:
         ENV: "prd"
-      when: always
-    - if: '$PROJECT == "storehangfireservice" || $PROJECT == "all"'
       when: always
     - when: never
 
