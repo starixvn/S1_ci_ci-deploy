@@ -16,7 +16,7 @@ stages:
 
 variables:
   PROJECT:
-    value: "" # default value of the dropdown list
+    value: "nova" # default value of the dropdown list
     options: # options in the dropdown list
       - "nova"
       - "12bet"
