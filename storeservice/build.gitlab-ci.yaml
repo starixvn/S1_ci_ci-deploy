@@ -1,8 +1,8 @@
 .build_template_storeservice: &build_template_storeservice
   stage: build
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  variables:
-    REPO: backend/storeservice
+  #variables:
+  #  REPO: backend/storeservice
 
 build-storeservice:
   <<: *build_template_storeservice
@@ -17,13 +17,31 @@ build-storeservice:
       variables:
         ENV: "prd"
       when: always 
-   
+      when: never
+
+    - if: '$PROJECT == "nova"'
+      variables:
+        REPO: backend/nova-storeservice
+      when: always 
+    - if: '$PROJECT == "12bet"'
+      variables:
+        REPO: backend/12bet-storeservice
+      when: always
+    - if: '$PROJECT == "yashbet"'
+      variables:
+        REPO: backend/yashbet-storeservice
+      when: always
   script:
     - !reference [.build_to_ecr]
+    - echo "REPO = $REPO"
     - echo "branch = $CI_COMMIT_BRANCH"
     - echo "variables PROJECT=${PROJECT}"
     - echo "variables PROJECTPORT=${PROJECTPORT}"
     - echo "variables ENV=${ENV}"
+
+    - ETTA_TEST=backend/$PROJECT-storeservice 
+    - echo "variables ETTA_TEST=${ETTA_TEST}"
+    - REPO=backend/storeservice
 
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG

@@ -3,6 +3,7 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
   variables:
     REPO: backend/storeservice
+  
   before_script:
     - !reference [.common_variables]
     - echo "branch = $CI_COMMIT_BRANCH"
