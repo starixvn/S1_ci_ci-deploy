@@ -25,6 +25,8 @@ build-storehangfireservice:
 
   script:
     - !reference [.build_to_ecr]
+    - echo "variables PROJECT=${PROJECT}"
+    
     - docker build -f StoreService/StoreHangfireService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
