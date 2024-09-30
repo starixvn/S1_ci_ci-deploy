@@ -16,9 +16,9 @@ stages:
 
 variables:
   PROJECT:
-    value: "nova" # default value of the dropdown list
-    options: # options in the dropdown list
-      - "nova"
-      - "12bet"
-      - "yashbet"
-    description: "etta test."
+    value: "storeservice"
+    options:
+      - "storeservice"
+      - "hangfirestoreservice"
+      - "all"
+    description: "please select one brand to build & deploy."

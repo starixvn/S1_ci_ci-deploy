@@ -4,28 +4,6 @@
   variables:
     REPO: backend/storeservice
 
-  # before_script:
-  #   - echo "Setting REPO and IMAGE_PREFIX based on the branch..."
-  #    判斷 PROJECT 並動態設置 REPO 和 IMAGE_PREFIX
-  #   - |
-  #     if [[ $PROJECT == "nova" ]]; then
-  #       export REPO="backend/nova-storeservice"
-  #     elif [[ $PROJECT == "12bet" ]]; then
-  #       export REPO="backend/onetwobet-storeservice"
-  #     elif [[ $PROJECT == "yashbet"  ]]; then
-  #       export REPO="backend/yashbet-storeservice"
-  #     fi
-  #   - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  #   - echo "REPO is set to ${REPO}"
-  #   - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
-  #   - echo "image is set to ${image}"
-  #   - REPO="backend/storeservice"
-  #   - IMAGE_PREFIX=484907507662
-  #   - image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
-  #   - echo "REPO is set to ${REPO}"
-  #   - echo "IMAGE_PREFIX is set to ${IMAGE_PREFIX}"
-  #   - echo "image is set to ${image}"
-
 build-storeservice:
   <<: *build_template_storeservice
   tags:
@@ -38,25 +16,13 @@ build-storeservice:
     - if: '$CI_COMMIT_BRANCH == "PRD"'
       variables:
         ENV: "prd"
-      when: always 
+      when: always
+    - if: '$PROJECT != "storeservice" && $PROJECT != "all"'
       when: never
+    when: never
 
   script:
     - !reference [.build_to_ecr]
-    - echo "REPO = $REPO"
-    - echo "branch = $CI_COMMIT_BRANCH"
-    - echo "variables PROJECT=${PROJECT}"
-    - echo "variables PROJECTPORT=${PROJECTPORT}"
-    - echo "variables ENV=${ENV}"
-
-    - ETTA_TEST=backend/$PROJECT-storeservice 
-    - echo "variables ETTA_TEST=${ETTA_TEST}"
-    - REPO=backend/storeservice
-
-    - pwd
-    - ls
-    - echo "PATH ENV=${PATH}"
-
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG

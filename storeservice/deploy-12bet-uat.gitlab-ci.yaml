@@ -3,14 +3,8 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/kubectl:latest
   variables:
     REPO: backend/storeservice
-  
   before_script:
     - !reference [.common_variables]
-    - echo "branch = $CI_COMMIT_BRANCH"
-    - echo "variables PROJECT=${PROJECT}"
-    - echo "variables PROJECTPORT=${PROJECTPORT}"
-    - echo "variables ENV=${ENV}"
-
     - NAMESPACE=api
     - CONTAINER_NAME=storeservice
     - echo "set image to - $IMAGE_NAME:$TAG"
@@ -22,14 +16,6 @@ eks-12bet-uat-storeservice:
   only:
     - DEV
   script:
-    - echo "branch = $CI_COMMIT_BRANCH"
-    - echo "variables PROJECT=${PROJECT}"
-    - echo "variables PROJECTPORT=${PROJECTPORT}"
-    - echo "variables ENV=${ENV}"
-
-    - ETTA_TEST=$PROJECT-desktop 
-    - echo "variables ETTA_TEST=${ETTA_TEST}"
-
     - DEPLOY_NAME=storeservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
