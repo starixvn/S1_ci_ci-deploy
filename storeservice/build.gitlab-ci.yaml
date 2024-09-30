@@ -11,13 +11,9 @@ build-storeservice:
     - ec2-gitlab-runner
   rules:
     - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all")'
-      variables:
-        ENV: "dev"
       when: always 
-    - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
-      variables:
-        ENV: "prd"
-      when: always
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+    #   when: always
     - when: never
 
   script:
