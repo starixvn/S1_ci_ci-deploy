@@ -10,13 +10,10 @@
     - |
       if [[ $PROJECT == "nova" ]]; then
         export REPO="backend/nova-storeservice"
-    #    export IMAGE_PREFIX=11111111111
       elif [[ $PROJECT == "12bet" ]]; then
         export REPO="backend/onetwobet-storeservice"
-    #    export IMAGE_PREFIX=484907507662
       elif [[ $PROJECT == "yashbet"  ]]; then
         export REPO="backend/yashbet-storeservice"
-    #    export IMAGE_PREFIX=22222222222
       fi
     #- image=$IMAGE_PREFIX.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
     - echo "REPO is set to ${REPO}"
