@@ -55,6 +55,7 @@ build-storeservice:
 
     - pwd
     - ls
+    - echo "PATH ENV=${PATH}"
 
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
