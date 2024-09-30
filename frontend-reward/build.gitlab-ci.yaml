@@ -15,10 +15,7 @@ build-reward:
     - stage
   script:
     - !reference [.build_to_ecr]
-    - echo "variables PROJECT=${PROJECT}"
-    - echo "variables PROJECTPORT=${PROJECTPORT}"
-    - echo "variables ENV=${ENV}"
-    
+
     - docker build -f dockerfile --build-arg project_name=$PROJECT --build-arg port=$PROJECTPORT --build-arg env=$ENV -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
