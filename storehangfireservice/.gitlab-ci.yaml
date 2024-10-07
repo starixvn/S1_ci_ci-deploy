@@ -21,8 +21,8 @@ variables:
       - "all"
       - "storeservice"
       - "storehangfireservice"
-    description: "please select one service to build & deploy.default is all."
+    description: "please select one service to build & deploy. default is all service in this repo."
   VERSION:
     value: ""
-    description: "if have value. only for deploy use."
+    description: "only for deploy use to rollback version if this variable have value."
 

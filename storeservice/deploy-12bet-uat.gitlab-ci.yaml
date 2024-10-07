@@ -7,14 +7,19 @@
     - !reference [.common_variables]
     - NAMESPACE=api
     - CONTAINER_NAME=storeservice
-    - echo "set image to - $IMAGE_NAME:$TAG"
+    - echo "variables VERSION=$VERSION"
+    - |
+      if [ -n "$VERSION" ]; then
+        IMAGE_TAG="$IMAGE_NAME:$VERSION"
+      else
+        IMAGE_TAG="$IMAGE_NAME:$TAG"
+      fi
+    - echo "set image to - $IMAGE_TAG"
 
 eks-12bet-uat-storeservice:
   <<: *deploy_12bet_uat_storeservice_template
   tags:
     - eks-12bet-uat
-  #only:
-  #  - DEV
   rules:
     - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all")'
       when: always 
@@ -23,6 +28,6 @@ eks-12bet-uat-storeservice:
     - when: never
   script:
     - DEPLOY_NAME=storeservice
-    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
+    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
 

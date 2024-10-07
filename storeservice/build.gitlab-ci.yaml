@@ -3,7 +3,6 @@
   image: 484907507662.dkr.ecr.ap-northeast-1.amazonaws.com/sre/docker-coreutils:latest
   variables:
     REPO: backend/storeservice
-    PROJECT: "all"
 
 build-storeservice:
   <<: *build_template_storeservice
@@ -12,13 +11,14 @@ build-storeservice:
   rules:
     - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all") && $VERSION == ""'
       when: always 
-    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all") && $VERSION == ""'
     #   when: always
     - when: never
 
   script:
     - !reference [.build_to_ecr]
     - echo "variables PROJECT=${PROJECT}"
+    - echo "variables VERSION=${VERSION}"
 
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG

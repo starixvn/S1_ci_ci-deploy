@@ -7,6 +7,7 @@
     - !reference [.common_variables]
     - NAMESPACE=worker
     - CONTAINER_NAME=storehangfireservice
+    - echo "variables VERSION=$VERSION"
     - |
       if [ -n "$VERSION" ]; then
         IMAGE_TAG="$IMAGE_NAME:$VERSION"
@@ -27,7 +28,6 @@ eks-12bet-uat-storehangfireservice:
     - when: never
   script:
     - DEPLOY_NAME=storehangfireservice
-    #- kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
 
