@@ -8,11 +8,19 @@ build-tpservice:
   <<: *build_template_tpservice
   tags:
     - ec2-gitlab-runner
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "tpservice" || $PROJECT == "all") && $VERSION == ""'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "tpservice" || $PROJECT == "all") && $VERSION == ""'
+    #   when: always
+    - when: never
   script:
     - !reference [.build_to_ecr]
+    - echo "variables PROJECT=${PROJECT}"
+    - echo "variables VERSION=${VERSION}"
+
     - docker build -f ThirdPartyService/ThirdPartyService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
+    - echo "Build completed. tag=$TAG"
 
