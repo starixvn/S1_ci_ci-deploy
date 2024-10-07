@@ -8,11 +8,19 @@ build-hangfireservice:
   <<: *build_template_hangfireservice
   tags:
     - ec2-gitlab-runner
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "adminsite" || $PROJECT == "all") && $VERSION == ""'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "adminsite" || $PROJECT == "all") && $VERSION == ""'
+    #   when: always
+    - when: never
   script:
     - !reference [.build_to_ecr]
+    - echo "variables PROJECT=${PROJECT}"
+    - echo "variables VERSION=${VERSION}"
+
     - docker build -f HangfireService/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
+    - echo "Build completed. tag=$TAG"
 

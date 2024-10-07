@@ -14,3 +14,14 @@ stages:
   - deploy-uat
   - deploy-prod
 
+variables:
+  PROJECT:
+    value: "all"
+    options:
+      - "all"
+      - "paymentservice"
+      - "paymentworker"
+    description: "please select one service to build & deploy. default is all service in this repo."
+  VERSION:
+    value: ""
+    description: "only for deploy use to rollback version if this variable have value."

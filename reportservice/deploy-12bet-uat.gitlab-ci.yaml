@@ -7,7 +7,14 @@
     - !reference [.common_variables]
     - NAMESPACE=api
     - CONTAINER_NAME=reportservice
-    - echo "set image to - $IMAGE_NAME:$TAG"
+    - echo "variables VERSION=$VERSION"
+    - |
+      if [ -n "$VERSION" ]; then
+        IMAGE_TAG="$IMAGE_NAME:$VERSION"
+      else
+        IMAGE_TAG="$IMAGE_NAME:$TAG"
+      fi
+    - echo "set image to - $IMAGE_TAG"
 
 eks-12bet-uat-reportservice:
   <<: *deploy_12bet_uat_reportservice_template
@@ -17,6 +24,6 @@ eks-12bet-uat-reportservice:
     - DEV
   script:
     - DEPLOY_NAME=reportservice
-    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_NAME:$TAG
+    - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG
     - kubectl rollout status -n $NAMESPACE deployment/$DEPLOY_NAME --timeout 600s
 
