@@ -20,8 +20,12 @@ eks-12bet-uat-commonservice:
   <<: *deploy_12bet_uat_commonservice_template
   tags:
     - eks-12bet-uat
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "commonservice" || $PROJECT == "all")'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "commonservice" || $PROJECT == "all")'
+    #  when: always
+    - when: never
   script:
     - DEPLOY_NAME=commonservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG

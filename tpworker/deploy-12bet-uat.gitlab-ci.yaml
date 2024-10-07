@@ -20,8 +20,12 @@ eks-12bet-uat-tpworker:
   <<: *deploy_12bet_uat_tpworker_template
   tags:
     - eks-12bet-uat
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "tpworker" || $PROJECT == "all")'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "tpworker" || $PROJECT == "all")'
+    #   when: always
+    - when: never
   script:
     - DEPLOY_NAME=tpworker
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG

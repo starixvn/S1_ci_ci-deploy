@@ -20,8 +20,12 @@ eks-12bet-uat-reportservice:
   <<: *deploy_12bet_uat_reportservice_template
   tags:
     - eks-12bet-uat
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "reportservice" || $PROJECT == "all")'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "reportservice" || $PROJECT == "all")'
+    #  when: always
+    - when: never
   script:
     - DEPLOY_NAME=reportservice
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG

@@ -20,8 +20,12 @@ eks-12bet-uat-thirdpartybethistory:
   <<: *deploy_12bet_uat_thirdpartybethistory_template
   tags:
     - eks-12bet-uat
-  only:
-    - DEV
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "thirdpartybethistory" || $PROJECT == "all")'
+      when: always 
+    # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "thirdpartybethistory" || $PROJECT == "all")'
+    #   when: always
+    - when: never
   script:
     - DEPLOY_NAME=thirdpartybethistory
     - kubectl set image --namespace $NAMESPACE deployment/$DEPLOY_NAME $CONTAINER_NAME=$IMAGE_TAG
