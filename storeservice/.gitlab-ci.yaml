@@ -23,5 +23,4 @@ variables:
       - "storehangfireservice"
     description: "please select one service to build & deploy.default is all."
   VERSION:
-    value: ""
     description: "if have value. only for deploy use."
