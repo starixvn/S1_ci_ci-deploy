@@ -4,13 +4,14 @@
   variables:
     REPO: backend/storeservice
     PROJECT: "all"
+    VERSION: ""
 
 build-storeservice:
   <<: *build_template_storeservice
   tags:
     - ec2-gitlab-runner
   rules:
-    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all")'
+    - if: '$CI_COMMIT_BRANCH == "DEV" && ($PROJECT == "storeservice" || $PROJECT == "all") && $VERSION != ""'
       when: always 
     # - if: '$CI_COMMIT_BRANCH == "PRD" && ($PROJECT == "storeservice" || $PROJECT == "all")'
     #   when: always
