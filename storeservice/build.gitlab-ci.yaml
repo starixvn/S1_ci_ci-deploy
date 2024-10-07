@@ -21,6 +21,7 @@ build-storeservice:
     - echo "variables PROJECT=${PROJECT}"
 
     - docker build -f StoreService/StoreService/Dockerfile -t $IMAGE_NAME:$TAG .
+    - echo "Build completed. tag : $IMAGE_NAME:$TAG"
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
 
