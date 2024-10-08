@@ -19,7 +19,7 @@ build-membersite:
     - echo "variables PROJECT=${PROJECT}"
     - echo "variables VERSION=${VERSION}"
 
-    - docker build -f StoreService/StoreHangfireService/Dockerfile -t $IMAGE_NAME:$TAG .
+    - docker build -f MemberSite/MemberSite/Dockerfile -t $IMAGE_NAME:$TAG .
     - docker push $IMAGE_NAME:$TAG
     - docker rmi $IMAGE_NAME:$TAG
     - echo "Build completed. tag=$TAG"
